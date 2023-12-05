@@ -16,7 +16,6 @@ def test_parser(name):
     ast = triplayacc.parser.parse(source)  # ,debug=True)
     print("AST:")
     print(ast)
-    triplayacc.export_parse_tree(source)
 
 def program_to_string(path):
     try:
