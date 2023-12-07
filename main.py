@@ -40,9 +40,9 @@ def program_to_string(path):
     except FileNotFoundError:
         return f"Die Datei '{path}' wurde nicht gefunden."
 
-def generate_parse_tree_dot_file(ast, file_path):
+def generate_parse_tree_dot_file(ast, file_path, extensive):
     parse_tree = graphviz.Digraph('parse_tree', comment='Parse-Tree for' + file_path)
-    ast.to_dot(parse_tree)
+    ast.to_dot(parse_tree, extensive)
     #print(parse_tree.source)
     # Exportiere den parse_tree in DOT-Format und speichern Sie es in einer Datei
     parse_tree_file_path = "parse_tree.dot"
@@ -51,9 +51,10 @@ def generate_parse_tree_dot_file(ast, file_path):
 
 
 
+
 if __name__ == '__main__':
     # Path to .tripla-File
-    file_path = "triplaprograms/simple_if_2.tripla"
+    file_path = "triplaprograms/complex.tripla"
     ast = build_ast(file_path)
 
     # Print program to console
@@ -66,4 +67,4 @@ if __name__ == '__main__':
     ast_to_string(ast)
 
     # Generate .dot-File including Parse-Tree
-    generate_parse_tree_dot_file(ast, file_path)
+    generate_parse_tree_dot_file(ast, file_path, extensive=False)
