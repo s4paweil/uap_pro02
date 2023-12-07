@@ -8,7 +8,9 @@ __pycache__/
 
 # Output Data
 *.out
+parsetab.py
 *.dot
+
 
 # Distribution / packaging
 .Python

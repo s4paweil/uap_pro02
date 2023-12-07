@@ -36,17 +36,16 @@
 
 import ply.yacc as yacc
 import syntax as ast
-from graphviz import Digraph
 
 # Get the token map from the lexer.  This is required.
 from triplalex import tokens
 
 
-
 # Precedence
 precedence = (
+    ('nonassoc', 'RP', 'IN'),
     ('left', 'SEMICOLON', 'COMMA', 'ID'),
-    ('nonassoc', 'ASSIGN', 'ELSE', 'LET', 'WHILE', 'IF', 'DO', 'IN'),
+    ('nonassoc', 'ASSIGN', 'ELSE', 'WHILE', 'IF', 'DO', 'LET'),
     ('left', 'OR'),
     ('left', 'AND'),
     ('nonassoc', 'LT', 'GT', 'EQ', 'NEQ', 'LTE', 'GTE'),
@@ -55,7 +54,7 @@ precedence = (
 )
 
 
-# Pasing rules
+# Parsing rules
 def p_E_let(p):
     'E : LET D IN E'
     p[0] = ast.LET(p[2], p[4])
@@ -131,11 +130,11 @@ def p_B_parentheses(p):
 
 def p_B_true(p):
     'B : TRUE'
-    p[0] = True
+    p[0] = ast.BOOL(True)
 
 def p_B_false(p):
     'B : FALSE'
-    p[0] = False
+    p[0] = ast.BOOL(False)
 
 def p_B_lop(p):
     '''
